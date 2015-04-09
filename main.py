@@ -75,7 +75,9 @@ root.minsize(width=1000,height=600)
 root.protocol("WM_DELETE_WINDOW",_quit)
 canvas = FigureCanvasTkAgg(fig, master=root)
 canvas.show()
-canvas.get_tk_widget().place(relwidth=0.6, relheight=0.9,relx=0.05,rely=0.05)
+canvas.get_tk_widget().place(relwidth=0.6, relheight=0.5,relx=0.05,rely=0.05)
+
+
 
 def s2changed(*args):
     thetalab2 = float(args[0])

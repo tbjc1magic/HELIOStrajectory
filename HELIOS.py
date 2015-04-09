@@ -10,6 +10,7 @@ __constant_c = 3.0e8
 
 def trajectory(v, thetalab, charge, mass, B, Resolution =100):
 
+
     Pcharge = charge *__constant_e
     Pmass_tmp = mass* __constant_u
     Pmass = Pmass_tmp/math.sqrt(1-v*v/(__constant_c*__constant_c))
@@ -21,7 +22,7 @@ def trajectory(v, thetalab, charge, mass, B, Resolution =100):
     OrbitRadius = Pmass * Vpr/(Pcharge*B)
     OrbitTime =  2*math.pi*Pmass/(Pcharge*B)
    
-    print OrbitRadius, OrbitTime
+    #print OrbitRadius, OrbitTime
     Zpos = []
     Rpos = []
 

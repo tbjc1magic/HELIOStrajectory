@@ -11,16 +11,17 @@ _KINEMATICS__constant_c = 3.0e8
 
 class KINEMATICS:
 
-    def __init__(self):
+    def __init__(self,m, K0, Eex2, Eex3):
 
+        #print m,K0,Eex2,Eex3
         #######################
         ####input parameters###
         #######################
 
-        self.K0 = None
-        self.m = [0,0,0,0]
-        self.Eex2 = None
-        self.Eex3 = None
+        self.K0 = K0
+        self.m = m
+        self.Eex2 = Eex2
+        self.Eex3 = Eex3
         #######################
         ###output parameters###
         #######################
