@@ -6,9 +6,6 @@ _KINEMATICS__constant_MeV = 1.6e-13
 _KINEMATICS__constant_e = 1.6e-19
 _KINEMATICS__constant_c = 3.0e8
 
-
-
-
 class KINEMATICS:
 
     def __init__(self,m, K0, Eex2, Eex3):
@@ -55,7 +52,6 @@ class KINEMATICS:
         phiCMS = random.random()*math.pi*2
         thetaCMS = math.acos(cos_theta)
 
-
         self.calculate(thetaCMS, phiCMS)
 
     def calculate(self, thetaCMS, phiCMS):
@@ -67,7 +63,7 @@ class KINEMATICS:
         m1_tmp = self.m[1]*__constant_u
         m2_tmp = self.m[2]*__constant_u
         m3_tmp = self.m[3]*__constant_u
-        
+
         Ek_tmp = self.K0*__constant_MeV
         v0_tmp = self.Ek2v(m0_tmp,Ek_tmp)
         P4Va = P4VECTOR(m0_tmp, v0_tmp)
@@ -96,13 +92,12 @@ class KINEMATICS:
             print "what the heck r u doing?"
             print "************************"
             raise Exception("I know shit!")
-        
+
         tmp2 = 2*E3_0_tmp*E2_0_tmp
 
         Pcms2_tmp = (tmp1*tmp1-tmp2*tmp2)/(4*Etot_tmp*Etot_tmp)
         Pcms_tmp = math.sqrt(Pcms2_tmp)/__constant_c
 
-        
         E3_tmp = math.sqrt(E3_0_tmp*E3_0_tmp+
                 Pcms_tmp*Pcms_tmp*__constant_c*__constant_c)
 
@@ -113,8 +108,6 @@ class KINEMATICS:
         PcmsX_tmp = Pcms_tmp*math.sin(thetaCMS)*math.cos(phiCMS)
         PcmsY_tmp = Pcms_tmp*math.sin(thetaCMS)*math.sin(phiCMS)
 
-
-
         P4Vc = P4VECTOR(E2_tmp/__constant_c,PcmsX_tmp,PcmsY_tmp,PcmsZ_tmp)
         P4Vd = P4VECTOR(E3_tmp/__constant_c,-PcmsX_tmp,-PcmsY_tmp,-PcmsZ_tmp)
 
@@ -123,18 +116,17 @@ class KINEMATICS:
 
         K2_tmp = P4Vc.array[0,0]*__constant_c-m2_tmp*__constant_c*__constant_c
         K3_tmp = P4Vd.array[0,0]*__constant_c-m3_tmp*__constant_c*__constant_c
-    
+
         K2 = K2_tmp/__constant_MeV
         K3 = K3_tmp/__constant_MeV
 
-        P2_tmp = math.sqrt(math.pow(P4Vc.array[1,0],2)+                  
+        P2_tmp = math.sqrt(math.pow(P4Vc.array[1,0],2)+
                             math.pow(P4Vc.array[2,0],2)+
                             math.pow(P4Vc.array[3,0],2))
 
-        P3_tmp = math.sqrt(math.pow(P4Vd.array[1,0],2)+                  
+        P3_tmp = math.sqrt(math.pow(P4Vd.array[1,0],2)+
                             math.pow(P4Vd.array[2,0],2)+
                             math.pow(P4Vd.array[3,0],2))
-
 
         thetalab2 = math.acos(P4Vc.array[3,0]/P2_tmp)
         philab2 = phiCMS
@@ -143,7 +135,7 @@ class KINEMATICS:
         if(phiCMS<math.pi):
             philab3 = phiCMS + math.pi
         else:
-            philab3 = phiCMS - math.pi 
+            philab3 = phiCMS - math.pi
 
         V2 = self.Ek2v(m2_tmp,K2_tmp)
         V3 = self.Ek2v(m3_tmp,K3_tmp)
@@ -159,7 +151,7 @@ class KINEMATICS:
         self.thetaCMS = thetaCMS/math.pi*180
         self.phiCMS = phiCMS/math.pi*180
 
-
+        #print self.K2,self.K3, self.thetalab2, self.thetalab3
 
     def findCMSu(self, m1, m2, v0):
         """unit:m1(kg),m2(kg),v0(m/s)"""
@@ -174,4 +166,3 @@ class KINEMATICS:
         ratio_tmp = Ek/(m*__constant_c*__constant_c)
         v=__constant_c*math.sqrt(1-1/((ratio_tmp+1)*(ratio_tmp+1)))
         return v
-
